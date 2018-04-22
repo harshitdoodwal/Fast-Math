@@ -83,8 +83,10 @@ public class GameManager : MonoBehaviour
 
 			
 		} else if (a_levelName == GameConstants.GAMEPLAY) {
-			
+
+			prefabHolder.textWin.text = string.Empty;
 			prefabHolder.gameEndPanel.SetActive (false);
+			prefabHolder.puzzlePanel.SetActive (true);
 			prefabHolder.textPuzzle.text = puzzleManager.GeneratePuzzle ();
 			int l_countDownValue = GetCountDownValue (puzzleManager.answer [puzzleManager.m_puzzleIndex]);
 			//Debug.Log ("puzzle soln " + puzzleManager.answer [puzzleManager.m_puzzleIndex]);
@@ -138,16 +140,25 @@ public class GameManager : MonoBehaviour
 
 	internal void AddScore (int a_playerID)
 	{
+		string l_winnerName = "SomeOne";
 		if (a_playerID == 0) {
 			m_scoreA++;
+			l_winnerName = "The PiMan";
 			prefabHolder.scoreA.text = m_scoreA.ToString ();
 		} else if (a_playerID == 1) {
 			m_scoreB++;
+			l_winnerName = "The Theta";
 			prefabHolder.scoreB.text = m_scoreB.ToString ();
 		}
 
+		prefabHolder.textWin.text = l_winnerName + " wins!";
+	}
+
+	internal void DrawCondition ()
+	{
 		prefabHolder.gameEndPanel.SetActive (true);
 		prefabHolder.puzzlePanel.SetActive (false);
+		prefabHolder.textWin.text = "Shoot for nerds";
 	}
 
 	#endregion

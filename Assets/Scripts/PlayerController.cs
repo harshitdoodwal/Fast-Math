@@ -9,11 +9,9 @@ public class PlayerController : MonoBehaviour
 
 	public float keypressTime = 0f;
 
+	public Animator muzzleEffect;
 
-	void Start ()
-	{
-		//GameManager.gm.InitilizePlayer (m_playerID);
-	}
+
 
 	void Update ()
 	{
@@ -40,12 +38,11 @@ public class PlayerController : MonoBehaviour
 	void OnDisable ()
 	{
 		keypressTime = 0f;
-
 	}
 
 	int OnGameWin ()
 	{
-
+		muzzleEffect.Play ("Shoot");
 		return this.m_playerID;
 	}
 

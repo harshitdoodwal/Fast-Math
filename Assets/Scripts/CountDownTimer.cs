@@ -33,8 +33,12 @@ public class CountDownTimer : MonoBehaviour
 			textTimer.text = Mathf.RoundToInt (a_duration).ToString ();
 			yield return new WaitForFixedUpdate ();
 			a_duration = a_duration - deltaTime;
-
+			if (a_duration <= 0) {
+				GameManager.gm.DrawCondition ();
+			}
 		}
+
+
 	}
 
 }

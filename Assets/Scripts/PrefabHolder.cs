@@ -12,8 +12,11 @@ public class PrefabHolder : MonoBehaviour
 	public Text textPuzzle;
 	public Text scoreA, scoreB;
 
+	public Text textWin;
+
 	public GameObject gameEndPanel;
 	public GameObject puzzlePanel;
+
 
 	public void ActionClickRestart ()
 	{
