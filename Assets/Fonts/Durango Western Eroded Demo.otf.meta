@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 15997cb4eacf3fb4ca4d57cdd528b7fd
+timeCreated: 1524390541
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Durango Western Eroded
+  fontNames:
+  - Durango Western Eroded
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: c89fb92c5d3a97041a3d80a27a3f589a
+timeCreated: 1524390541
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Western Bang Bang
+  fontNames:
+  - Western Bang Bang
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
