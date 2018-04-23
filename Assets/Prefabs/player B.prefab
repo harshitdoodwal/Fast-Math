@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1386675617580068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.03, y: -2.65, z: 0}
+  m_LocalPosition: {x: 4.76, y: -2.65, z: 0}
   m_LocalScale: {x: 0.1286872, y: 0.12868716, z: 0.12868716}
   m_Children:
   - {fileID: 4145935755316120}
@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerID: 1
-  attack: 324
+  attack: 323
   keypressTime: 0
-  muzzleEffect: {fileID: 95548248425420026}
+  anim: {fileID: 95548248425420026}
 --- !u!212 &212649949191083970
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -136,7 +136,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 234696721
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d1dda1b08c804f6439419261cb872bc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -180,7 +180,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 234696721
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

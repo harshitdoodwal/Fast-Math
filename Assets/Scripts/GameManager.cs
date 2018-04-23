@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
 	public enum GAMESTATE
 	{
+		Default,
 		MainMenu,
 		Game,
 		End,
@@ -20,9 +21,12 @@ public class GameManager : MonoBehaviour
 
 
 	public static bool isWinner = false;
-	public static int maxScore;
+	public static bool isReseting = false;
+
 	public int m_scoreA, m_scoreB;
 
+	public static bool isTutorialOn = true;
+	public GameObject cross, checkmark;
 
 	void Awake ()
 	{
@@ -38,8 +42,59 @@ public class GameManager : MonoBehaviour
 	{
 		
 		SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+		//InitLevel (GameConstants.MAINMENU);
 
 	}
+
+
+	void OnDisable ()
+	{
+		ClearPrefabs ();
+	}
+
+
+	#region ButtonEvents
+
+	public void ActionStartGame ()
+	{
+		if (!isTutorialOn) {
+			gameState = GAMESTATE.Game;
+			SceneManager.LoadScene (GameConstants.GAMEPLAY);
+		} else {
+			SceneManager.LoadScene ("Tutorial");
+		}
+	}
+
+	public void StartGame ()
+	{
+		gameState = GAMESTATE.Game;
+		SceneManager.LoadScene (GameConstants.GAMEPLAY);
+	}
+
+	public void ActionExitGame ()
+	{
+		//SoundManager.sm.ButtonClick ();
+		Application.Quit ();
+	}
+
+	public void ActionShowTutorial ()
+	{
+
+		if (isTutorialOn) {
+			cross.SetActive (true);
+			checkmark.SetActive (false);
+		} else {
+			cross.SetActive (false);
+			checkmark.SetActive (true);
+		}
+
+		isTutorialOn = !isTutorialOn;
+
+	}
+
+	#endregion
+
+	#region LevelMamnagement
 
 	public void SceneManager_sceneLoaded (Scene arg0, LoadSceneMode arg1)
 	{
@@ -51,45 +106,33 @@ public class GameManager : MonoBehaviour
 			InitLevel (GameConstants.GAMEPLAY);
 
 		} else if (gameState == GAMESTATE.MainMenu) {
-			
+
 			InitLevel (GameConstants.MAINMENU);
 
 		}
 	}
 
-	void OnDisable ()
-	{
-		ClearPrefabs ();
-	}
-
-
-	#region ButtonEvents
-
-	public void ActionStartGame (string a_levelName)
-	{
-		gameState = GAMESTATE.Game;
-		SceneManager.LoadScene (a_levelName);
-
-	}
-
-	#endregion
-
-	#region LevelMamnagement
 
 	internal void InitLevel (string a_levelName)
 	{
 		if (a_levelName == GameConstants.MAINMENU) {
+			
 
-
+			Debug.Log ("init menu called");
+			SoundManager.sm.BackGroundMusic (SoundManager.sm.mainMenuBGM);
 			
 		} else if (a_levelName == GameConstants.GAMEPLAY) {
+			isReseting = true;
+			SoundManager.sm.BackGroundMusic (SoundManager.sm.gameStartBGM [Random.Range (0, SoundManager.sm.gameStartBGM.Length)]);
 
 			prefabHolder.textWin.text = string.Empty;
-			prefabHolder.gameEndPanel.SetActive (false);
-			prefabHolder.puzzlePanel.SetActive (true);
 			prefabHolder.textPuzzle.text = puzzleManager.GeneratePuzzle ();
+			EnablePuzzlePanel ();
+
+			if (gameState != GAMESTATE.MainMenu)
+				gameState = GAMESTATE.Game;
+			
 			int l_countDownValue = GetCountDownValue (puzzleManager.answer [puzzleManager.m_puzzleIndex]);
-			//Debug.Log ("puzzle soln " + puzzleManager.answer [puzzleManager.m_puzzleIndex]);
 			CountDownTimer.instance.StartTimer (l_countDownValue);
 
 		}
@@ -97,7 +140,8 @@ public class GameManager : MonoBehaviour
 
 	public void RestartLevel ()
 	{
-		gameState = GAMESTATE.Game;
+		
+		Debug.Log (gameState);
 		InitLevel (GameConstants.GAMEPLAY);
 
 	}
@@ -120,7 +164,7 @@ public class GameManager : MonoBehaviour
 
 	int GetCountDownValue (int a_rangeValue)
 	{
-		return a_rangeValue + Random.Range (5, 10);
+		return a_rangeValue + Random.Range (9, 15);
 	}
 
 	#endregion
@@ -151,14 +195,26 @@ public class GameManager : MonoBehaviour
 			prefabHolder.scoreB.text = m_scoreB.ToString ();
 		}
 
+		DisablePuzzlePanel ();
 		prefabHolder.textWin.text = l_winnerName + " wins!";
 	}
 
 	internal void DrawCondition ()
 	{
+		DisablePuzzlePanel ();
+		prefabHolder.textWin.text = "Shoot you nerds";
+	}
+
+	void DisablePuzzlePanel ()
+	{
 		prefabHolder.gameEndPanel.SetActive (true);
 		prefabHolder.puzzlePanel.SetActive (false);
-		prefabHolder.textWin.text = "Shoot for nerds";
+	}
+
+	void EnablePuzzlePanel ()
+	{
+		prefabHolder.gameEndPanel.SetActive (false);
+		prefabHolder.puzzlePanel.SetActive (true);
 	}
 
 	#endregion

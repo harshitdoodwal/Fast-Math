@@ -1,19 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour
 {
+	public static SoundManager sm;
+	public AudioSource src;
+	public AudioClip gunshot, buttonPress;
+	public AudioClip mainMenuBGM;
+	public AudioClip[] gameStartBGM;
 
-	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
-	
+		if (!sm)
+			sm = this;
+		else
+			Destroy (this);
+
+		DontDestroyOnLoad (this);
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+	public void GunShot ()
 	{
-	
+		src.clip = gunshot;
+		src.Play ();
+	}
+
+
+
+	public void BackGroundMusic (AudioClip a_clip)
+	{
+		src.clip = a_clip;
+		src.Play ();
 	}
 }
 

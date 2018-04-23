@@ -9,15 +9,17 @@ public class PlayerController : MonoBehaviour
 
 	public float keypressTime = 0f;
 
-	public Animator muzzleEffect;
-
-
+	public Animator anim;
 
 	void Update ()
 	{
-		if (Input.GetKeyUp (attack) && GameManager.gm.gameState == GameManager.GAMESTATE.Game) {
+		if (Input.GetKeyUp (attack) && GameManager.gm.gameState == GameManager.GAMESTATE.Game && !GameManager.isReseting) {
 			
 			GameManager.gm.gameState = GameManager.GAMESTATE.End;
+
+			this.anim.SetTrigger ("shoot");
+			SoundManager.sm.GunShot ();
+
 			this.keypressTime = CountDownTimer.instance.m_duration;
 			bool l_isSuccess = GameManager.gm.ValidateInput (this.m_playerID);
 			int l_winPlayerID;
@@ -42,7 +44,6 @@ public class PlayerController : MonoBehaviour
 
 	int OnGameWin ()
 	{
-		muzzleEffect.Play ("Shoot");
 		return this.m_playerID;
 	}
 
@@ -53,4 +54,6 @@ public class PlayerController : MonoBehaviour
 		else
 			return 0;
 	}
+
+
 }

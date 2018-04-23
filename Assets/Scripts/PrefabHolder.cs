@@ -20,12 +20,13 @@ public class PrefabHolder : MonoBehaviour
 
 	public void ActionClickRestart ()
 	{
-		//Debug.Log ("RestartHit");
+		
 		GameManager.gm.RestartLevel ();
 	}
 
 	public void ActionClickHome ()
 	{
+		
 		GameManager.gm.ReturnHome ();
 	}
 }

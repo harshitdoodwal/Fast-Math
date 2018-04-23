@@ -28,10 +28,12 @@ public class CountDownTimer : MonoBehaviour
 
 	IEnumerator E_StartTimer (float a_duration)
 	{
+		
 		while (a_duration >= 0 && GameManager.gm.gameState == GameManager.GAMESTATE.Game) {
 			m_duration = a_duration;
 			textTimer.text = Mathf.RoundToInt (a_duration).ToString ();
 			yield return new WaitForFixedUpdate ();
+			GameManager.isReseting = false;
 			a_duration = a_duration - deltaTime;
 			if (a_duration <= 0) {
 				GameManager.gm.DrawCondition ();
