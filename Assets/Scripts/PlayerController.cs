@@ -26,13 +26,13 @@ public class PlayerController : MonoBehaviour
 
 			if (l_isSuccess) {
 				l_winPlayerID = OnGameWin ();
-				Debug.Log (this.gameObject.name + " won at " + this.keypressTime);
+				//Debug.Log (this.gameObject.name + " won at " + this.keypressTime);
 			} else {
 				l_winPlayerID = OnGameLose ();
-				Debug.Log (this.gameObject.name + " disqualified " + this.keypressTime);
+				//Debug.Log (this.gameObject.name + " disqualified " + this.keypressTime);
 			}
 
-			Debug.Log ("win ID " + l_winPlayerID);
+			//Debug.Log ("win ID " + l_winPlayerID);
 			GameManager.gm.AddScore (l_winPlayerID);
 		}
 	}

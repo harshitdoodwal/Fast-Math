@@ -48,20 +48,21 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 15997cb4eacf3fb4ca4d57cdd528b7fd, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: fd46af41c78e4c54e8aba771e118406c, type: 3}
+    m_FontSize: 15
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 15
+    m_MaxSize: 30
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: The age difference of 2 brothers was 6 in 2006. What would be age difference
-    now?
+    m_LineSpacing: 1.2
+  m_Text: You have two books. One of them is upside-down and the other is rotated
+    so the top of the book is facing you. What is the sum of the first page in each
+    book?
 --- !u!222 &222849659653917194
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -83,6 +84,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.09, y: 7.93}
-  m_SizeDelta: {x: 669.79, y: 63.82}
+  m_AnchoredPosition: {x: -12.09, y: 7.9}
+  m_SizeDelta: {x: 669.8, y: 100.8}
   m_Pivot: {x: 0.5, y: 0.5}

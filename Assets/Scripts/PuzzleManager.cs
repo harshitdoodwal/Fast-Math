@@ -16,8 +16,12 @@ public class PuzzleManager : MonoBehaviour
 
 	public string GeneratePuzzle ()
 	{
+		if (puzzles.Count <= 0) {
+			return "EOF";
+		}
+
 		int l_puzzleIndex = Random.Range (0, puzzles.Count);
-		Debug.Log ("puzzle Index " + l_puzzleIndex);
+		//Debug.Log ("puzzle Index " + l_puzzleIndex);
 		string l_puzzle = puzzles [l_puzzleIndex];
 		puzzles.RemoveAt (l_puzzleIndex);
 		m_puzzleIndex = l_puzzleIndex;

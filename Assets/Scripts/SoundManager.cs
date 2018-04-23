@@ -12,12 +12,12 @@ public class SoundManager : MonoBehaviour
 
 	void Awake ()
 	{
-		if (!sm)
+		if (sm == null)
 			sm = this;
-		else
-			Destroy (this);
+		else if (sm != this)
+			Destroy (gameObject);
 
-		DontDestroyOnLoad (this);
+		DontDestroyOnLoad (gameObject);
 	}
 
 	public void GunShot ()

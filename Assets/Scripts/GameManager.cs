@@ -26,16 +26,17 @@ public class GameManager : MonoBehaviour
 	public int m_scoreA, m_scoreB;
 
 	public static bool isTutorialOn = true;
-	public GameObject cross, checkmark;
+
 
 	void Awake ()
 	{
-		if (!gm)
+		if (gm == null)
 			gm = this;
-		else
-			Destroy (this);
+		else if (gm != this)
+			Destroy (gameObject);
 
-		DontDestroyOnLoad (this);
+		DontDestroyOnLoad (gameObject);
+		//Debug.Log ("Awake Called");
 	}
 
 	void Start ()
@@ -71,26 +72,9 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene (GameConstants.GAMEPLAY);
 	}
 
-	public void ActionExitGame ()
-	{
-		//SoundManager.sm.ButtonClick ();
-		Application.Quit ();
-	}
 
-	public void ActionShowTutorial ()
-	{
 
-		if (isTutorialOn) {
-			cross.SetActive (true);
-			checkmark.SetActive (false);
-		} else {
-			cross.SetActive (false);
-			checkmark.SetActive (true);
-		}
 
-		isTutorialOn = !isTutorialOn;
-
-	}
 
 	#endregion
 
@@ -118,7 +102,7 @@ public class GameManager : MonoBehaviour
 		if (a_levelName == GameConstants.MAINMENU) {
 			
 
-			Debug.Log ("init menu called");
+			//Debug.Log ("init menu called");
 			SoundManager.sm.BackGroundMusic (SoundManager.sm.mainMenuBGM);
 			
 		} else if (a_levelName == GameConstants.GAMEPLAY) {
@@ -126,7 +110,15 @@ public class GameManager : MonoBehaviour
 			SoundManager.sm.BackGroundMusic (SoundManager.sm.gameStartBGM [Random.Range (0, SoundManager.sm.gameStartBGM.Length)]);
 
 			prefabHolder.textWin.text = string.Empty;
-			prefabHolder.textPuzzle.text = puzzleManager.GeneratePuzzle ();
+			string l_puzzleText = puzzleManager.GeneratePuzzle ();
+
+			if (l_puzzleText == "EOF") {
+				StartCoroutine (GameEnded ());
+				return;
+			}
+
+			prefabHolder.textPuzzle.text = l_puzzleText;
+
 			EnablePuzzlePanel ();
 
 			if (gameState != GAMESTATE.MainMenu)
@@ -141,7 +133,7 @@ public class GameManager : MonoBehaviour
 	public void RestartLevel ()
 	{
 		
-		Debug.Log (gameState);
+		//Debug.Log (gameState);
 		InitLevel (GameConstants.GAMEPLAY);
 
 	}
@@ -150,9 +142,22 @@ public class GameManager : MonoBehaviour
 	{
 		m_scoreA = 0;
 		m_scoreB = 0;
-		puzzleManager.puzzles.Clear ();
-		puzzleManager.answer.Clear ();
+//		puzzleManager.puzzles.Clear ();
+//		puzzleManager.answer.Clear ();
+	}
 
+	IEnumerator  GameEnded ()
+	{
+		int l_timer = 10;
+	
+		while (l_timer >= 0) {
+			prefabHolder.textPuzzle.text = "Game Over ! Going Back to Main Menu in " + l_timer + " seconds";
+			EnablePuzzlePanel ();
+			yield return new WaitForSeconds (1f);
+			l_timer--;
+		}
+	
+		ReturnHome ();
 	}
 
 	public void ReturnHome ()
@@ -164,7 +169,7 @@ public class GameManager : MonoBehaviour
 
 	int GetCountDownValue (int a_rangeValue)
 	{
-		return a_rangeValue + Random.Range (9, 15);
+		return a_rangeValue + Random.Range (7, 13);
 	}
 
 	#endregion
